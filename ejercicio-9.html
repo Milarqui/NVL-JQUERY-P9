@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>My other jQuery test page</title>
+ </head>
+ <body>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+   $( document ).ready(function() {
+    $( "#container" ).children( "div" ).each( function () {//Esta función busca los hijos de #container
+     $(this).attr("class",$(this).attr("id"));             //y cambia el atributo "class" en cada elemento para que tenga el mismo valor que el atributo "id"
+     $(this).children( "div" ).each( function() {          //Usamos un método similar para que el atributo "id" 
+      $(this).attr("id",$(this).attr("class"));            //de los tipos de música sean igual a su atributo "class"
+     });
+    });                                                    //
+    var heroes = $( "#heroes" )                            //Como va a usarse varias veces, creamos una variable del selector #heroes
+    heroes.parentsUntil( "#container" ).each( function () {//Buscamos los padres de #heroes
+      alert($(this).attr("class"));                        //Y obtenemos por pantalla los tipos de musica y la década a la que pertenecen
+    });
+    heroes.nextAll().each( function () {                   //Escoge los hermanos "menores" de #heroes
+     $(this).attr("id",$(this).text());                    //Y les da el id igual a su nombre
+    });
+    if(!$( "#queen" ).length) {                            //Comprueba si existe el elemento con id "queen"
+     var queen = $( "<p id='queen'>Queen</p>" );           //Si no existe, crea el elemento
+     queen.appendTo($( "div.ochenta div.internacional" )); //Y lo añade al grupo
+    }
+   });
+  </script>
+  <div id="container">
+   <h1>Grupos de música</h1>
+   <div id="setenta">
+       <div class="internacional">
+           <h2>Internacionales</h2>
+           <p>ABBA</p>
+           <p>Beach Boys</p>
+           <p>Bee Gees</p>
+           <p>Led Zeppelin</p>
+           <p>Pink Floyd</p>
+       </div>
+       <div class="nacional">
+           <h2>Españoles</h2>
+           <p>Camilo Sesto</p>
+           <p>Miguel Rios</p>
+           <p>Mocedades</p>
+           <p>Nino Bravo</p>
+       </div>
+   </div>
+   <div id="ochenta">
+       <div class="internacional">
+           <h2>Internacionales</h2>
+           <p>AC/DC</p>
+           <p>Aerosmith</p>
+           <p>Bon Jovi</p>
+           <p>The Cure</p>
+           <p>Europe</p>
+           <p>Motörhead</p>
+           <p>Supertramp</p>
+       </div>
+       <div class="nacional">
+           <h2>Españoles</h2>
+           <p>Alaska y Dinarama</p>
+           <p>Barricada</p>
+           <p id="heroes">Héroes del Silencio</p>
+           <p>Mecano</p>
+           <p>Radio Futura</p>
+       </div>
+   </div>
+   <div id="noventa">
+       <div class="internacional">
+           <h2>Internacionales</h2>
+           <p>Back Street Boys</p>
+           <p>The Cardigans</p>
+           <p>Daft Punk</p>
+           <p>Evanescence</p>
+           <p>Foo Fighters</p>
+           <p>Marilyn Manson</p>
+       </div>
+       <div class="nacional">
+           <h2>Españoles</h2>
+           <p>Amaral</p>
+           <p>Extremoduro</p>
+           <p>La Fuga</p>
+           <p>Los fresones rebeldes</p>
+       </div>
+   </div>
+  </div>
+ </body>
+</html>
